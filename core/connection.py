@@ -1,3 +1,4 @@
+import chardet
 from core.helpers import highlight
 from core.execmethods.mssqlexec import MSSQLEXEC
 from core.execmethods.wmiexec import WMIEXEC
@@ -229,5 +230,6 @@ class Connection:
                 self.cmeserver.server.hosts.append(self.host)
 
         output = exec_method.execute(payload, get_output)
+	encoding = chardet.detect(output).get('encoding')
 
-        return u'{}'.format(output.strip().decode('utf-8'))
+        return u'{}'.format(output.strip().decode(encoding))
