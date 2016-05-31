@@ -231,5 +231,6 @@ class Connection:
 
         output = exec_method.execute(payload, get_output)
 	encoding = chardet.detect(output).get('encoding')
+	encoding = encoding if encoding else 'utf-8'
 
         return u'{}'.format(output.strip().decode(encoding))
